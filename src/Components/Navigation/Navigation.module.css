@@ -1,0 +1,23 @@
+.navigation {
+  width: 80%;
+  margin: 0 auto;
+  text-align: start;
+  padding: 12px 12px 12px 36px;
+  border-bottom: 1px solid grey;
+}
+
+.link {
+  color: rgb(150, 150, 150);
+  text-decoration: none;
+  padding: 12px;
+  display: inline-block;
+}
+
+.link:not(:last-child) {
+  margin-right: 12px;
+}
+
+.activeLink {
+  color: rgb(49, 110, 190);
+  text-decoration: underline 2px;
+}
