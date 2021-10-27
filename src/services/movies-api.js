@@ -36,6 +36,6 @@ export function fetchMoviesReviews({ movieId }) {
 
 export function fetchMoviesByName({ searchQuery }) {
   return fetchWihtErrorHandling(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&language=en-US&page=1&include_adult=false`
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=1&include_adult=false`
   );
 }

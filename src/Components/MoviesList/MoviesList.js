@@ -7,8 +7,7 @@ import s from "../MoviesList/MoviesList.module.css";
 function MoviesList({ movies }) {
   const { url } = useRouteMatch();
   const location = useLocation();
-  // const history = useHistory();
-  console.log("location list", location);
+
   const urlForDetail = url.replace("movies", "");
 
   return (
@@ -25,21 +24,13 @@ function MoviesList({ movies }) {
           >
             {movie.title}
           </NavLink>
-
-          {/* <NavLink to={`${urlForDetail}movies/${movie.id}`}                        
-                        className={s.link}                        
-                        activeClassName={s.activeLink}>
-                        
-                        {movie.title}                      
-                            
-                    </NavLink>        */}
         </li>
       ))}
     </ul>
   );
 }
 
-MoviesList.protoType = {
+MoviesList.propTypes = {
   movies: PropTypes.array,
 };
 

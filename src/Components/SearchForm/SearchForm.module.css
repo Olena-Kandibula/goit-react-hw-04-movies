@@ -24,57 +24,22 @@
 
 /* //============ */
 .searchForm {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   width: 80%;
-  margin: 0 auto;
   max-width: 480px;
-  background-color: #fff;
-  border-radius: 3px;
+
   overflow: hidden;
   max-width: max-content;
 }
-
-.searchFormButton {
-  width: 36px;
-  height: 36px;
-  padding: 1px;
-  border: 0;
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.6;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  outline: none;
-}
-
-.searchFormButton:hover {
-  opacity: 1;
-}
-
-.searchFormButtonLabel {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-  border: 0;
-}
-
 .searchFormInput {
   display: inline-block;
   width: 100%;
   font: inherit;
   font-size: 20px;
-  border: none;
-  outline: none;
+  /* border: none; */
+  /* outline: none; */
   max-width: max-content;
-  padding: 2px 4px;
+  padding: 4px;
+  margin-right: 12px;
 }
 
 .searchFormInput::placeholder {

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import { useParams } from "react-router-dom";
 
-// // import PropTypes from "prop-types";
 import * as moviesAPI from "../../services/movies-api";
 
 import defaultImg from "../../images/defaultImg.png";
@@ -19,7 +17,7 @@ function CastView() {
       .fetchMoviesCast({ movieId })
       .then((data) => setCast(data.cast))
       .catch((error) => console.warn(error));
-  }, []);
+  }, [movieId]);
 
   return (
     <>

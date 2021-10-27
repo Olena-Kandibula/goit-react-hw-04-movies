@@ -16,6 +16,7 @@ import Button from "../../Components/Button/Button";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
 import * as moviesAPI from "../../services/movies-api";
+import defaultImg from "../../images/defaultImg.png";
 import s from "../MovieDetailsView/MovieDetailsView.module.css";
 
 const CastView = lazy(() =>
@@ -31,11 +32,8 @@ function MovieDetailsView() {
 
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
-
   const location = useLocation();
   const history = useHistory();
-  // console.log('location detail', location.state.from);
-  // console.log('history detail',history)
 
   useEffect(() => {
     setStatus("pending");
@@ -52,40 +50,25 @@ function MovieDetailsView() {
   }, [movieId]);
 
   useEffect(() => {
-    window.localStorage.setItem("urlFrom", JSON.stringify(location.state.from));
-  }, [movieId]);
+    window.localStorage.setItem(
+      "urlFrom",
+      JSON.stringify(location.state.from.pathname)
+    );
+  }, []);
 
   const onGoBack = () => {
-    const currentURL = history.location.pathname;
-
     if (!location.state) {
       history.push(location?.state?.from ?? "/");
-    }
-    if (currentURL.includes("cast") || currentURL.includes("reviews")) {
-      history.go(-1);
-    }
-
-    history.goBack();
-    // history.push(location?.state?.from ?? '/')
+    } else history.push(JSON.parse(window.localStorage.getItem("urlFrom")));
   };
 
-  if (status === "idle") {
-    return <h1>Wait, please</h1>;
-  }
-
-  if (status === "pending") {
-    return <h1>Please, wait</h1>;
-  }
-
-  if (status === "rejected") {
-    return <h1>Please, wait...</h1>;
-  }
-
   if (status === "resolved") {
-    const imgId = `http://image.tmdb.org/t/p/w200${movie.poster_path}`;
-    const userScore = movie.vote_average * 10;
+    const srcImgById = movie.poster_path
+      ? `http://image.tmdb.org/t/p/w200${movie.poster_path}`
+      : defaultImg;
 
-    const yearReleseMovie = movie.release_date.slice(0, 4);
+    const userScore = movie.vote_average * 10;
+    const yearReleseMovie = movie.release_date.slice(0, 4) || "19..";
     const genresMovie = movie.genres.map((genre) => genre.name).join("  ");
 
     return (
@@ -93,7 +76,7 @@ function MovieDetailsView() {
         <Button onClick={onGoBack} children={<RiArrowGoBackLine />}></Button>
 
         <div className={s.containerMovie}>
-          <img src={imgId} display="inline-block" alt={movie.title} />
+          <img src={srcImgById} display="inline-block" alt={movie.title} />
 
           <div className={s.description}>
             <h2>{movie.original_title}</h2>
@@ -117,7 +100,6 @@ function MovieDetailsView() {
           <p>Additional information</p>
 
           <NavLink
-            // to={`${url}/cast`}
             to={{
               pathname: `${url}/cast`,
               state: { from: location },
@@ -129,7 +111,6 @@ function MovieDetailsView() {
           </NavLink>
 
           <NavLink
-            // to={`${url}/reviews`}
             to={{
               pathname: `${url}/reviews`,
               state: { from: location },
@@ -155,7 +136,7 @@ function MovieDetailsView() {
       </Container>
     );
   }
-  return <h1>Upss..</h1>;
+  return <p>Please, wait</p>;
 }
 
 export default MovieDetailsView;

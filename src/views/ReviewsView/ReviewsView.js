@@ -15,7 +15,7 @@ function ReviewsView() {
       .fetchMoviesReviews({ movieId })
       .then((data) => setReviews(data.results))
       .catch((error) => console.warn(error));
-  }, []);
+  }, [movieId]);
 
   return (
     <>
