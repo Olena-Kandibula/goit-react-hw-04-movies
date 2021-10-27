@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/CastView/CastView.module.css"],"names":[],"mappings":"AAAA,sBACE,SACF,CAEA,sBACE,eACF,CACA,uCACE,kBACF,CAEA,qBACE,eACF","file":"CastView.27adf254.chunk.css","sourcesContent":[".list {\n  padding: 0;\n}\n\n.item {\n  list-style: none;\n}\n.item:not(:last-child) {\n  margin-bottom: 24px;\n}\n\n.img {\n  max-width: 300px;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/views/ReviewsView/ReviewsView.module.css"],"names":[],"mappings":"AAAA,yBACE,SACF,CAEA,yBACE,eACF,CACA,0CACE,kBACF","file":"ReviewsView.1cb6c512.chunk.css","sourcesContent":[".list {\n  padding: 0;\n}\n\n.item {\n  list-style: none;\n}\n.item:not(:last-child) {\n  margin-bottom: 24px;\n}\n"]}
