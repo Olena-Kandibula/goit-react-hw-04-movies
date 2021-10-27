@@ -1,0 +1,21 @@
+.list {
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.link {
+  color: rgb(80, 78, 78);
+  text-decoration: none;
+}
+
+.activeLink {
+  color: rgb(49, 110, 190);
+  text-decoration: underline 2px;
+}

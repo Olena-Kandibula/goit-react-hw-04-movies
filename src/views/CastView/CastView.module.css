@@ -1,0 +1,14 @@
+.list {
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+.item:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.img {
+  max-width: 300px;
+}

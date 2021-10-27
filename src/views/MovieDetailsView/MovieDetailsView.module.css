@@ -1,0 +1,38 @@
+.containerMovie {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* padding-top: 12px; */
+  padding-bottom: 12px;
+  border-bottom: 1px solid grey;
+}
+
+.containerMovie img {
+  margin-right: 16px;
+}
+
+.description h2 {
+  display: inline-block;
+  margin: 0px;
+  margin-right: 8px;
+}
+
+.link {
+  display: block;
+  color: rgb(77, 75, 75);
+  text-decoration: none;
+}
+
+.link:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.activeLink {
+  color: rgb(49, 110, 190);
+  text-decoration: underline 2px;
+}
+
+.information {
+  padding: 12px 0 12px;
+  /* border-bottom: 1px solid grey; */
+}

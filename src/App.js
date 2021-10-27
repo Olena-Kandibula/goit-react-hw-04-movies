@@ -1,28 +1,45 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Navigation from "./Components/Navigation";
-import HomeView from "./views/HomeView/HomeView";
-import MoviesView from "./views/MoviesView/MoviesView";
+
+const HomeView = lazy(() =>
+  import("./views/HomeView/HomeView.js" /*webpackChunkName:"HomeView" */)
+);
+const MoviesView = lazy(() =>
+  import("./views/MoviesView/MoviesView.js" /*webpackChunkName:"MoviesView" */)
+);
+const MovieDetailsView = lazy(() =>
+  import(
+    "./views/MovieDetailsView/MovieDetailsView.js" /*webpackChunkName:"MovieDetailsView" */
+  )
+);
 
 function App() {
   return (
     <div className="App">
       <Navigation />
 
-      <Switch>
-        <Route path="/" exact>
-          <HomeView />
-        </Route>
+      <Suspense fallback={<h1>Loading ...</h1>}>
+        <Switch>
+          <Route path="/" exact>
+            <HomeView />
+          </Route>
 
-        <Route path="/movies">
-          <MoviesView />
-        </Route>
+          <Route path="/movies/:movieId">
+            <MovieDetailsView />
+          </Route>
 
-        <Route>
-          <HomeView />
-        </Route>
-      </Switch>
+          <Route path="/movies" exact>
+            <MoviesView />
+          </Route>
+
+          <Route>
+            <HomeView />
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
