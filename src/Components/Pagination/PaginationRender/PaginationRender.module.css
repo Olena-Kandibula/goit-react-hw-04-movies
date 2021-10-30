@@ -1,0 +1,15 @@
+.button:not(:last-child) {
+  margin-right: 4px;
+}
+
+.button :hover {
+  background-color: hotpink;
+}
+
+.button:active {
+  background-color: indigo;
+}
+
+.activ {
+  border: 2px solid red;
+}

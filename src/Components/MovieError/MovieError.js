@@ -1,5 +1,5 @@
-function MovieError() {
-  return <p>Unknown movie title, please try again! </p>;
+function MovieError({ errorQuery }) {
+  return <p>`Unknown movie title ${errorQuery}, please try again!` </p>;
 }
 
 export default MovieError;

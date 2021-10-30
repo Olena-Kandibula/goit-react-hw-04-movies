@@ -29,7 +29,7 @@ function ReviewsView() {
           ))}
         </ul>
       ) : (
-        <p>NO reviews</p>
+        <p>No reviews</p>
       )}
     </>
   );

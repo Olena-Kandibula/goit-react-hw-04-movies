@@ -10,6 +10,8 @@ import MovieError from "../../Components/MovieError/MovieError";
 function MoviesView() {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
 
   const formSubmitHandler = (searchQuery) => {
     setSearchQuery(searchQuery);
@@ -23,23 +25,34 @@ function MoviesView() {
       .fetchMoviesByName({ searchQuery })
       .then((data) => {
         if (data.total_results !== 0) {
-          return setMovies(data.results);
+          return setMovies(data.results), setStatus("resolved");
         }
-        return setSearchQuery("unCorrect");
+
+        return setError(searchQuery), setStatus("rejected");
       })
       .catch((error) => console.warn(error));
   }, [searchQuery]);
 
-  return (
-    <Container>
-      <SearchForm onSubmit={formSubmitHandler} />
-      {searchQuery !== "unCorrect" ? (
+  if (status === "idle") {
+    return (
+      <Container>
+        <SearchForm onSubmit={formSubmitHandler} />
+      </Container>
+    );
+  }
+
+  if (status === "rejected") {
+    return <MovieError errorQuery={error} />;
+  }
+
+  if (status === "resolved") {
+    return (
+      <Container>
+        <SearchForm onSubmit={formSubmitHandler} />
         <MoviesList movies={movies} />
-      ) : (
-        <MovieError />
-      )}
-    </Container>
-  );
+      </Container>
+    );
+  }
 }
 
 export default MoviesView;

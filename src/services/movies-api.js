@@ -10,9 +10,10 @@ async function fetchWihtErrorHandling(url = "", config = {}) {
   // : Promise.reject(new Error('Not found'));
 }
 
-export function fetchMoviesTrending() {
+export function fetchMoviesTrending({ context }) {
+  console.log("api", context);
   return fetchWihtErrorHandling(
-    `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
+    `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${context}`
   );
 }
 
@@ -39,3 +40,9 @@ export function fetchMoviesByName({ searchQuery }) {
     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}&page=1&include_adult=false`
   );
 }
+
+// export function fetchMoviesTrendingPagination() {
+//   return fetchWihtErrorHandling(
+//     `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
+//   );
+// }

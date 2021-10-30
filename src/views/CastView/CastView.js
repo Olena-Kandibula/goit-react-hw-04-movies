@@ -41,7 +41,7 @@ function CastView() {
           ))}
         </ul>
       ) : (
-        <p>NO results</p>
+        <p>Please, wait</p>
       )}
     </>
   );
