@@ -11,7 +11,6 @@ async function fetchWihtErrorHandling(url = "", config = {}) {
 }
 
 export function fetchMoviesTrending({ context }) {
-  console.log("api", context);
   return fetchWihtErrorHandling(
     `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${context}`
   );

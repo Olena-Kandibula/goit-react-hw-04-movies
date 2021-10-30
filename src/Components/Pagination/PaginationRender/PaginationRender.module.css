@@ -1,5 +1,5 @@
 .button:not(:last-child) {
-  margin-right: 4px;
+  margin-right: 6px;
 }
 
 .button :hover {
@@ -12,4 +12,8 @@
 
 .activ {
   border: 2px solid red;
+}
+
+.button {
+  width: 56px;
 }
