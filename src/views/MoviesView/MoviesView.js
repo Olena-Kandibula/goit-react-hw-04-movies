@@ -1,58 +1,59 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 import * as moviesAPI from "../../services/movies-api";
 
 import Container from "../../Components/Container/Container";
 import SearchForm from "../../Components/SearchForm/SearchForm";
 import MoviesList from "../../Components/MoviesList/MoviesList";
-import MovieError from "../../Components/MovieError/MovieError";
 
 function MoviesView() {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [status, setStatus] = useState("idle");
-  const [error, setError] = useState("");
+  const history = useHistory();
+  const location = useLocation();
 
-  const formSubmitHandler = (searchQuery) => {
-    setSearchQuery(searchQuery);
-  };
+  const searchURL = `${location.pathname}${location.search}`;
+
+  useEffect(() => {
+    setSearchQuery("");
+    const query = new URLSearchParams(location.search).get("query");
+    if (query === null) {
+      return;
+    }
+    setSearchQuery(query);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("urlFrom", JSON.stringify(searchURL));
+  }, [searchURL]);
 
   useEffect(() => {
     if (searchQuery === "") {
       return;
     }
+
     moviesAPI
       .fetchMoviesByName({ searchQuery })
-      .then((data) => {
-        if (data.total_results !== 0) {
-          return setMovies(data.results), setStatus("resolved");
-        }
-
-        return setError(searchQuery), setStatus("rejected");
-      })
+      .then((data) => setMovies(data.results))
       .catch((error) => console.warn(error));
   }, [searchQuery]);
 
-  if (status === "idle") {
-    return (
-      <Container>
-        <SearchForm onSubmit={formSubmitHandler} />
-      </Container>
-    );
-  }
+  const formSubmitHandler = (searchQuery) => {
+    history.push({ ...location, search: `query=${searchQuery}` });
+    setSearchQuery(searchQuery);
+  };
 
-  if (status === "rejected") {
-    return <MovieError errorQuery={error} />;
-  }
-
-  if (status === "resolved") {
-    return (
-      <Container>
-        <SearchForm onSubmit={formSubmitHandler} />
+  return (
+    <Container>
+      <SearchForm onSubmit={formSubmitHandler} />
+      {!searchQuery || movies.length ? (
         <MoviesList movies={movies} />
-      </Container>
-    );
-  }
+      ) : (
+        <h1>ups...</h1>
+      )}
+    </Container>
+  );
 }
 
 export default MoviesView;

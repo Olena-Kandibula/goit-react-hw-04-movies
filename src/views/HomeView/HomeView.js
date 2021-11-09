@@ -21,6 +21,10 @@ function HomeView() {
       .catch((error) => console.warn(error));
   }, [context]);
 
+  useEffect(() => {
+    localStorage.setItem("urlFrom", JSON.stringify("/"));
+  }, []);
+
   return (
     <Container title="Trending today">
       <MoviesList movies={movies} />

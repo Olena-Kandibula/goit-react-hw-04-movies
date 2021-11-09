@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import { Context } from "../../../views/HomeView/Context";
 

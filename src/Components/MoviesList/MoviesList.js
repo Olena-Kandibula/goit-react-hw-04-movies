@@ -5,9 +5,8 @@ import { NavLink, useRouteMatch, useLocation } from "react-router-dom";
 import s from "../MoviesList/MoviesList.module.css";
 
 function MoviesList({ movies }) {
-  const { url } = useRouteMatch();
   const location = useLocation();
-
+  const { url } = useRouteMatch();
   const urlForDetail = url.replace("movies", "");
 
   return (

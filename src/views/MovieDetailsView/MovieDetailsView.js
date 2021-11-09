@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { lazy, Suspense } from "react";
 
 import {
@@ -28,33 +28,19 @@ const ReviewsView = lazy(() =>
 
 function MovieDetailsView() {
   const [movie, setMovie] = useState(null);
-  const [status, setStatus] = useState("idle");
-
   const { url, path } = useRouteMatch();
   const { movieId } = useParams();
   const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    setStatus("pending");
-
-    if (movieId !== []) {
-      moviesAPI
-        .fetchMoviesById({ movieId })
-        .then((data) => {
-          return setMovie(data), setStatus("resolved");
-        })
-        .catch((error) => console.warn(error));
-    }
-    return setStatus("rejected");
+    moviesAPI
+      .fetchMoviesById({ movieId })
+      .then((data) => {
+        setMovie(data);
+      })
+      .catch((error) => console.warn(error));
   }, [movieId]);
-
-  useEffect(() => {
-    window.localStorage.setItem(
-      "urlFrom",
-      JSON.stringify(location.state.from.pathname)
-    );
-  }, []);
 
   const onGoBack = () => {
     if (!location.state) {
@@ -62,7 +48,7 @@ function MovieDetailsView() {
     } else history.push(JSON.parse(window.localStorage.getItem("urlFrom")));
   };
 
-  if (status === "resolved") {
+  if (movie) {
     const srcImgById = movie.poster_path
       ? `http://image.tmdb.org/t/p/w200${movie.poster_path}`
       : defaultImg;
